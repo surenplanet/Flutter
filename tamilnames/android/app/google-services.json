@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "705421718470",
+    "firebase_url": "https://tamilnames-91fba.firebaseio.com",
+    "project_id": "tamilnames-91fba",
+    "storage_bucket": "tamilnames-91fba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705421718470:android:6067bf5e754176e0a9f8c7",
+        "android_client_info": {
+          "package_name": "com.surenlab.tamilnames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705421718470-4tbvopsg5m9i5cgkn2hf0gb7lvgraldo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.surenlab.tamilnames",
+            "certificate_hash": "60982e5d40d4526f8169ecd5594e83c85a46fedc"
+          }
+        },
+        {
+          "client_id": "705421718470-18793gr6g0eblo83r1f5pi2889a0h5er.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSoLEK7qdOs8X0fIwVfgrZ8_ospFL-5IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705421718470-18793gr6g0eblo83r1f5pi2889a0h5er.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
