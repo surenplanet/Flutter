@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/user_auth.dart';
 import '../models/http_exception.dart';
+import '../helpers/validations.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -24,8 +25,8 @@ class UserAuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+                  Color.fromRGBO(255, 20, 147, 1).withOpacity(0.7),
+                  Color.fromRGBO(0, 0, 255, 1).withOpacity(0.4),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -46,8 +47,8 @@ class UserAuthScreen extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 20.0),
                       padding:
                           EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
-                      transform: Matrix4.rotationZ(-8 * pi / 180)
-                        ..translate(-10.0),
+//                      transform: Matrix4.rotationZ(20 * pi / 180)
+//                        ..translate(-10.0),
                       // ..translate(-10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -61,11 +62,11 @@ class UserAuthScreen extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'MyShop',
+                        'தமிழ் பெயர்கள்',
                         style: TextStyle(
                           color:
                               Theme.of(context).accentTextTheme.headline6.color,
-                          fontSize: 50,
+                          fontSize: 20,
                           fontFamily: 'Anton',
                           fontWeight: FontWeight.normal,
                         ),
@@ -76,6 +77,17 @@ class UserAuthScreen extends StatelessWidget {
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
                   ),
+//                  Flexible(
+//                    child: Text(
+//                      "Please login/Signup to get personalised options.",
+//                      style: TextStyle(
+//                        color: Colors.black,
+//                        fontSize: 18,
+////                        fontFamily: 'Anton',
+//                        fontWeight: FontWeight.normal,
+//                      ),
+//                    ),
+//                  )
                 ],
               ),
             ),
@@ -249,7 +261,7 @@ class _AuthCardState extends State<AuthCard>
                   decoration: InputDecoration(labelText: 'E-Mail'),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value.isEmpty || !value.contains('@')) {
+                    if (value.isEmpty || !validateEmail(value)) {
                       return 'Invalid email!';
                     }
                     return null;

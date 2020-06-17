@@ -1,25 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class Name {
+  final String id;
   final String nameTamil;
   final String nameEnglish;
   final String meaning;
-  final int likes;
-  final DocumentReference reference;
+//  final int likes;
+  bool isFavorite;
 
-  Name.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['nameTamil'] != null),
-        assert(map['nameEnglish'] != null),
-        assert(map['meaning'] != null),
-        assert(map['likes'] != null),
-        nameTamil = map['nameTamil'],
-        nameEnglish = map['nameEnglish'],
-        meaning = map['meaning'],
-        likes = map['likes'];
-
-  Name.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  @override
-  String toString() => "$nameTamil - $nameEnglish";
+  Name({
+    @required this.id,
+    @required this.nameTamil,
+    @required this.nameEnglish,
+    @required this.meaning,
+    this.isFavorite = false,
+  });
 }

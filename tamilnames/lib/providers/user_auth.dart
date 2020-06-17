@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/http_exception.dart';
 import '../helpers/constants_config.dart';
@@ -74,7 +75,12 @@ class UserAuth with ChangeNotifier {
   }
 
   Future<void> signup(String email, String password) async {
-    return _authenticate(email, password, ConstantsConfig.signupURL);
+    final returnvar = _authenticate(email, password, ConstantsConfig.signupURL);
+    Firestore.instance
+        .collection('names')
+        .document()
+        .setData({'userId': _userId, 'favNames': ''});
+    return returnvar;
   }
 
   Future<void> login(String email, String password) async {

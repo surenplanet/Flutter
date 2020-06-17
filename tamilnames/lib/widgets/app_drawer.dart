@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/names_screen.dart';
+import '../providers/user_auth.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -17,7 +19,7 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.category),
             title: Text('All Names'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(NamesScreen.routeName);
+//              Navigator.of(context).pus(NamesScreen());
             },
           ),
           Divider(),
@@ -26,6 +28,12 @@ class AppDrawer extends StatelessWidget {
             title: Text('Contact Us'),
             trailing: Text('surenplanet@gmail.com'),
           ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.eject),
+            title: Text('Logout'),
+            onTap: () => Provider.of<UserAuth>(context, listen: false).logout(),
+          )
         ],
       ),
     );

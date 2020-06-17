@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './providers/user_auth.dart';
+import './providers/names.dart';
 
 import "./screens/home_screen.dart";
 import "./screens/splash_screen.dart";
@@ -20,6 +21,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: UserAuth(),
         ),
+        ChangeNotifierProxyProvider<UserAuth, Names>(
+          update: (ctx, auth, previousNames) => Names(
+            auth.token,
+            auth.userId,
+            previousNames == null ? [] : previousNames.items,
+          ),
+        ),
       ],
       child: Consumer<UserAuth>(
         builder: (ctx, auth, _) => MaterialApp(
@@ -35,19 +43,20 @@ class MyApp extends StatelessWidget {
               },
             ),*/
           ),
-          home: NamesScreen(),
-//          auth.isAuth
-//              ? HomeScreen()
-//              : FutureBuilder(
-//                  future: auth.tryAutoLogin(),
-//                  builder: (ctx, authResultSnapshot) =>
-//                      authResultSnapshot.connectionState ==
-//                              ConnectionState.waiting
-//                          ? SplashScreen()
-//                          : UserAuthScreen(),
-//                ),
+          home:
+//          NamesScreen(),
+              auth.isAuth
+                  ? NamesScreen()
+                  : FutureBuilder(
+                      future: auth.tryAutoLogin(),
+                      builder: (ctx, authResultSnapshot) =>
+                          authResultSnapshot.connectionState ==
+                                  ConnectionState.waiting
+                              ? SplashScreen()
+                              : UserAuthScreen(),
+                    ),
           routes: {
-            NamesScreen.routeName: (ctx) => NamesScreen(),
+//            NamesScreen.routeName: (ctx) => NamesScreen(),
           },
         ),
       ),
