@@ -8,14 +8,19 @@ class NameItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = Provider.of<Name>(context, listen: false);
-
+    print('inNameItem-->$name');
     final authData = Provider.of<UserAuth>(context, listen: false);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        footer: GridTileBar(
-          backgroundColor: Colors.black87,
-          leading: Consumer<Name>(
+    print(authData.userId);
+    return Padding(
+      key: ValueKey(name.nameEnglish),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: ListTile(
+          trailing: Consumer<Name>(
             builder: (ctx, name, _) => IconButton(
               icon: Icon(
                 name.isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -31,7 +36,11 @@ class NameItem extends StatelessWidget {
           ),
           title: Text(
             name.toString(),
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
+          ),
+          subtitle: Text(
+            name.meaning,
+            textAlign: TextAlign.left,
           ),
         ),
       ),

@@ -35,7 +35,7 @@ class _NamesScreenState extends State<NamesScreen> {
   @override
   void didChangeDependencies() {
     print('Inside Namescreen-didChangeDependencies');
-    print(_isInit);
+
     if (_isInit) {
       setState(() {
         _isLoading = true;
@@ -48,7 +48,7 @@ class _NamesScreenState extends State<NamesScreen> {
     }
     _isInit = false;
     super.didChangeDependencies();
-    print('Inside Namescreen-didChangeDependencies');
+    print('End of Namescreen-didChangeDependencies');
   }
 
   @override

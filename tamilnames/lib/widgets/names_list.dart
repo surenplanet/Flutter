@@ -13,25 +13,33 @@ class NamesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final namesData = Provider.of<Names>(context);
     final names = showFavs ? namesData.favoriteItems : namesData.items;
-    print(names.length);
-    return GridView.builder(
-      padding: const EdgeInsets.all(10.0),
+    print('InNamesList--.length-->$names.length');
+    return ListView.builder(
+      padding: const EdgeInsets.only(top: 20.0),
       itemCount: names.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-        // builder: (c) => products[i],
         value: names[i],
-        child: NameItem(
-            // products[i].id,
-            // products[i].title,
-            // products[i].imageUrl,
-            ),
-      ),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        child: NameItem(),
       ),
     );
+//    return GridView.builder(
+//      padding: const EdgeInsets.all(10.0),
+//      itemCount: names.length,
+//      itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
+//        // builder: (c) => products[i],
+//        value: names[i],
+//        child: NameItem(
+//            // products[i].id,
+//            // products[i].title,
+//            // products[i].imageUrl,
+//            ),
+//      ),
+//      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//        crossAxisCount: 2,
+//        childAspectRatio: 3 / 2,
+//        crossAxisSpacing: 10,
+//        mainAxisSpacing: 10,
+//      ),
+//    );
   }
 }
