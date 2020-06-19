@@ -29,39 +29,38 @@ class Names with ChangeNotifier {
   Future<void> fetchAndSetNames() async {
     print('Inside fetchAndSetnames');
     final List<Name> loadedNames = [];
-
+    final List<dynamic> fav = [];
     final extractedData = Firestore.instance
         .collection('tamilnames')
         .snapshots(); //stream<Querysnapshots>
-    final extractedFavData = Firestore.instance
+    Firestore.instance
         .collection('userfavorites')
         .document(userId)
         .get()
         .then((doc) {
       if (doc.exists) {
-        print('DocumentSnapshot data: ${doc.data}');
+        fav.addAll(doc.data['myfavnames']);
       } else {
         print('No Document found');
-      }r
+      }
+
+      extractedData.forEach((snapshot) {
+        print(snapshot.toString());
+        snapshot.documents.map((data) {
+          print('Data-->' + data.toString());
+          final record = Name.fromSnapshot(data);
+          record.isFavorite =
+              fav == null ? false : fav.contains(record.id) ?? true;
+          loadedNames.add(record);
+          print('Data Fav ' +
+              record.id.toString() +
+              '-->' +
+              record.isFavorite.toString());
+        }).toList();
+      });
+      _items = loadedNames;
+
+      notifyListeners();
     });
-
-//            (value) => (if(value != null){print('DocumentSnapshot data: ${document.data}');}
-//        else{print('No Document found');})
-//    );
-
-    extractedData.forEach((snapshot) {
-      print(snapshot.toString());
-      snapshot.documents.map((data) {
-        print(data.toString());
-        final record = Name.fromSnapshot(data);
-//        record.isFavorite = extractedFavData == null ? false : extractedFavData.[record.id] ?? false
-        loadedNames.add(record);
-        print(record.toString());
-      }).toList();
-    });
-    _items = loadedNames;
-
-    print(_items.length);
-    notifyListeners();
   }
 }

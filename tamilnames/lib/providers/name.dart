@@ -49,7 +49,11 @@ class Name with ChangeNotifier {
     Firestore.instance
         .collection('userfavorites')
         .document(userId)
-        .setData({"name": id})
+        .updateData({
+          "myfavnames": isFavorite
+              ? FieldValue.arrayUnion([id])
+              : FieldValue.arrayRemove([id])
+        })
         .then((value) => null)
         .catchError(() => _setFavValue(oldStatus));
 //    final url =
